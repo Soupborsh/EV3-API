@@ -28,6 +28,7 @@ override CFLAGS += -std=c99
 override CFLAGS += -fno-strict-aliasing -fwrapv
 override CFLAGS += -Wall -Wextra -Wpointer-sign -Wno-unused-parameter
 override CFLAGS += -D_GNU_SOURCE=1
+override CFLAGS += -O3 -march=armv5te
 
 # logging control
 ifeq ($(VERBOSE)$(V),)
@@ -49,7 +50,7 @@ libev3api.a: $(OBJS)
 $(OBJDIR)/%.o: %.c $(OBJDIR)/%.d
 	@echo " [CC]  $<"
 	@$(MKDIR) $(@D)
-	$(Q)$(CC) -isystem include -MMD -MP -Os $(CFLAGS) -isystem. -I API -c $< -o $@
+	$(Q)$(CC) -isystem include -MMD -MP $(CFLAGS) -isystem. -I API -c $< -o $@
 
 $(DEPFILES):
 	@$(MKDIR) $(@D)
@@ -93,3 +94,4 @@ clean:
 	$(RM) $(OBJDIR) *.a *.pc example
 
 .PHONY: all clean install uninstall
+
