@@ -73,8 +73,9 @@ install: libev3api.a API/libev3api.pc.in
 	@echo " [INSTALL]  libev3api.pc"
 	$(Q)$(INSTALL) libev3api.pc $(LIBDIR)/pkgconfig/
 
-	@echo " [INSTALL]  API/*.h"
-	$(Q)$(INSTALL) API/*.h      $(INCLUDEDIR)/ev3api/
+	@echo " [INSTALL]  include/*.h"
+	$(Q)$(INSTALL) include/*.h $(INCLUDEDIR)/ev3api/
+	$(Q)$(INSTALL) include/ev3_sensors/*.h $(INCLUDEDIR)/ev3api/
 
 uninstall:
 	$(RM) $(LIBDIR)/libev3api.a            \
