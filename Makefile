@@ -15,7 +15,7 @@ RM = rm -rf
 OBJDIR := .objs
 # - for install
 DESTDIR    ?= $(CURDIR)/installed
-INCLUDEDIR ?= $(DESTDIR)/include
+INCLUDEDIR ?= $(DESTDIR)/include/ev3api
 LIBDIR     ?= $(DESTDIR)/lib
 
 # define files
@@ -67,20 +67,19 @@ install: libev3api.a API/libev3api.pc.in
 	           API/libev3api.pc.in > libev3api.pc
 
 	@echo " [INSTALL]  libev3api.a"
-	$(Q)$(MKDIR) $(LIBDIR)/pkgconfig $(INCLUDEDIR)/ev3api
+	$(Q)$(MKDIR) $(LIBDIR)/pkgconfig $(INCLUDEDIR)
 	$(Q)$(INSTALL) libev3api.a  $(LIBDIR)/
 
 	@echo " [INSTALL]  libev3api.pc"
 	$(Q)$(INSTALL) libev3api.pc $(LIBDIR)/pkgconfig/
 
 	@echo " [INSTALL]  include/*.h"
-	$(Q)$(INSTALL) include/*.h $(INCLUDEDIR)/ev3api/
-	$(Q)$(INSTALL) include/ev3_sensors/*.h $(INCLUDEDIR)/ev3api/
+	$(Q)$(INSTALL) -r include/* $(INCLUDEDIR)
 
 uninstall:
 	$(RM) $(LIBDIR)/libev3api.a            \
 	      $(LIBDIR)/pkgconfig/libev3api.pc \
-	      $(INCLUDEDIR)/ev3api
+	      $(INCLUDEDIR)
 
 
 # sanity check helper
